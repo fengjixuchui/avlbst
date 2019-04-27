@@ -215,7 +215,7 @@ static avlbst_p avlbst_keep_balance_rem(avlbst_p n)
 	return n;
 }
 
-avlbst_p avlbst_remove_recursive(avlbst_p r, size_t key, void(*on_free)(void *userdata))
+static avlbst_p avlbst_remove_recursive(avlbst_p r, size_t key, void(*on_free)(void *userdata))
 {
 	if(!r) return r;
 	
