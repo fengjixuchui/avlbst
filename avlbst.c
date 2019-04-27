@@ -183,9 +183,7 @@ size_t avlbst_find_min_key(avlbst_p pavlbst, avlbst_p *ppn)
 	return n->key;
 }
 
-
-
-static avlbst_p avlbst_keep_balance_rem(avlbst_p n, size_t key)
+static avlbst_p avlbst_keep_balance_rem(avlbst_p n)
 {
 	int balance = avlbst_get_balance(n);
 
@@ -217,7 +215,7 @@ static avlbst_p avlbst_keep_balance_rem(avlbst_p n, size_t key)
 	return n;
 }
 
-avlbst_p avlbst_remove_recursive(avlbst_p r, size_t key, void(*on_free)(void *userdata))
+static avlbst_p avlbst_remove_recursive(avlbst_p r, size_t key, void(*on_free)(void *userdata))
 {
 	if(!r) return r;
 	
@@ -254,7 +252,7 @@ avlbst_p avlbst_remove_recursive(avlbst_p r, size_t key, void(*on_free)(void *us
 	if(!r) return r;
 	r->height = avlbst_max(avlbst_height(r->l_child), avlbst_height(r->r_child)) + 1;
 
-	return avlbst_keep_balance_rem(r, key);
+	return avlbst_keep_balance_rem(r);
 }
 
 int avlbst_remove(avlbst_p *ppavlbst, size_t key, void(*on_free)(void *userdata))
